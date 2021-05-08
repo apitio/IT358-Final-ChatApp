@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat App</title>
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="/Frontend/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="/Frontend/CSS/chat.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script>
+  </script>
+
+</head>
+<body>
+
+
+
+  <section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i> Chat Application
+      </div>
+      <div class="msger-header-options">
+        <span><i class="fas fa-cog"></i></span>
+      </div>
+    </header>
+  
+    <main class="msger-chat">
+      <div class="msg left-msg">
+        <div
+         class="msg-img"
+         style="background-image: URL(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9Ikljb25zIiB2aWV3Qm94PSIwIDAgNDggNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiM0NTQxM2M7b3BhY2l0eTowLjE1O30uY2xzLTJ7ZmlsbDojZGFlZGY3O30uY2xzLTN7ZmlsbDojZmZmO30uY2xzLTR7ZmlsbDpub25lO30uY2xzLTEwLC5jbHMtNCwuY2xzLTcsLmNscy04LC5jbHMtOXtzdHJva2U6IzQ1NDEzYztzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQ7fS5jbHMtNXtmaWxsOiNjMGRjZWI7fS5jbHMtNiwuY2xzLTd7ZmlsbDojYWRjNGQ5O30uY2xzLTh7ZmlsbDojZmY2MjQyO30uY2xzLTl7ZmlsbDojMDBkZmViO30uY2xzLTEwe2ZpbGw6IzYyN2I4Yzt9PC9zdHlsZT48L2RlZnM+PHRpdGxlLz48ZyBkYXRhLW5hbWU9IiZsdDtHcm91cCZndDsiIGlkPSJfR3JvdXBfIj48ZWxsaXBzZSBjbGFzcz0iY2xzLTEiIGN4PSIyNCIgY3k9IjQ1LjUiIGRhdGEtbmFtZT0iJmx0O0VsbGlwc2UmZ3Q7IiBpZD0iX0VsbGlwc2VfIiByeD0iMTkuNSIgcnk9IjEuNSIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQyLDQwLjVhNCw0LDAsMCwxLTQsNEgxMGE0LDQsMCwwLDEtNC00VjI3YTE4LDE4LDAsMCwxLDM2LDBaIiBkYXRhLW5hbWU9IiZsdDtQYXRoJmd0OyIgaWQ9Il9QYXRoXyIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTI0LDlBMTgsMTgsMCwwLDAsNiwyN3Y1YTE4LDE4LDAsMCwxLDM2LDBWMjdBMTgsMTgsMCwwLDAsMjQsOVoiIGRhdGEtbmFtZT0iJmx0O1BhdGgmZ3Q7IiBpZD0iX1BhdGhfMiIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTQyLDQwLjVhNCw0LDAsMCwxLTQsNEgxMGE0LDQsMCwwLDEtNC00VjI3YTE4LDE4LDAsMCwxLDM2LDBaIiBkYXRhLW5hbWU9IiZsdDtQYXRoJmd0OyIgaWQ9Il9QYXRoXzMiLz48cmVjdCBjbGFzcz0iY2xzLTUiIGRhdGEtbmFtZT0iJmx0O1JlY3RhbmdsZSZndDsiIGhlaWdodD0iMTIiIGlkPSJfUmVjdGFuZ2xlXyIgcng9IjIiIHJ5PSIyIiB3aWR0aD0iMTMiIHg9IjE3LjUiIHk9IjM0Ii8+PHJlY3QgY2xhc3M9ImNscy02IiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBoZWlnaHQ9IjIiIGlkPSJfUmVjdGFuZ2xlXzIiIHdpZHRoPSIxMyIgeD0iMTcuNSIgeT0iMzguNSIvPjxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTQ1LjUsMzUuOTJhMSwxLDAsMCwxLS41Ljg3TDQyLDM4LjVWMjZsMywxLjcxYTEsMSwwLDAsMSwuNS44N1oiIGRhdGEtbmFtZT0iJmx0O1BhdGgmZ3Q7IiBpZD0iX1BhdGhfNCIvPjxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTIuNSwzNS45MmExLDEsMCwwLDAsLjUuODdMNiwzOC41VjI2TDMsMjcuNzFhMSwxLDAsMCwwLS41Ljg3WiIgZGF0YS1uYW1lPSImbHQ7UGF0aCZndDsiIGlkPSJfUGF0aF81Ii8+PHBhdGggY2xhc3M9ImNscy00IiBkPSJNMjQsOUE5LDksMCwwLDEsMzQuNSwyLjI3IiBkYXRhLW5hbWU9IiZsdDtQYXRoJmd0OyIgaWQ9Il9QYXRoXzYiLz48Y2lyY2xlIGNsYXNzPSJjbHMtOCIgY3g9IjM2IiBjeT0iMy41IiBkYXRhLW5hbWU9IiZsdDtFbGxpcHNlJmd0OyIgaWQ9Il9FbGxpcHNlXzIiIHI9IjIuNSIvPjxyZWN0IGNsYXNzPSJjbHMtNCIgZGF0YS1uYW1lPSImbHQ7UmVjdGFuZ2xlJmd0OyIgaGVpZ2h0PSIxMiIgaWQ9Il9SZWN0YW5nbGVfMyIgcng9IjIiIHJ5PSIyIiB3aWR0aD0iMTMiIHg9IjE3LjUiIHk9IjM0Ii8+PHBhdGggY2xhc3M9ImNscy04IiBkPSJNMTkuNSwzNGg5YTIsMiwwLDAsMSwyLDJ2Mi41YTAsMCwwLDAsMSwwLDBoLTEzYTAsMCwwLDAsMSwwLDBWMzZBMiwyLDAsMCwxLDE5LjUsMzRaIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBpZD0iX1JlY3RhbmdsZV80Ii8+PHBhdGggY2xhc3M9ImNscy00IiBkPSJNMzMuNSwxMS43MWExOCwxOCwwLDAsMC0xOSwwVjI0aDE5WiIvPjxjaXJjbGUgY2xhc3M9ImNscy05IiBjeD0iMzIuNSIgY3k9IjI1IiBkYXRhLW5hbWU9IiZsdDtFbGxpcHNlJmd0OyIgaWQ9Il9FbGxpcHNlXzMiIHI9IjUiLz48Y2lyY2xlIGNsYXNzPSJjbHMtMTAiIGN4PSIzMi41IiBjeT0iMjUiIGRhdGEtbmFtZT0iJmx0O0VsbGlwc2UmZ3Q7IiBpZD0iX0VsbGlwc2VfNCIgcj0iMiIvPjxjaXJjbGUgY2xhc3M9ImNscy05IiBjeD0iMTUuNSIgY3k9IjI1IiBkYXRhLW5hbWU9IiZsdDtFbGxpcHNlJmd0OyIgaWQ9Il9FbGxpcHNlXzUiIHI9IjUiLz48Y2lyY2xlIGNsYXNzPSJjbHMtMTAiIGN4PSIxNS41IiBjeT0iMjUiIGRhdGEtbmFtZT0iJmx0O0VsbGlwc2UmZ3Q7IiBpZD0iX0VsbGlwc2VfNiIgcj0iMiIvPjwvZz48L3N2Zz4=)"
+        ></div>
+
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">Admin</div>
+          </div>
+  
+          <div class="msg-text">
+            <p style="font-size: 20px; margin: 5px;"> Hi, welcome to Operations ChatBot!😄<br></p>
+            <p style="margin: 5px;"> <b>Script template:</b> <i>script-scriptname-month-day-cycle </i> </p>
+            <p style="margin: 5px;"> <b>Example:</b> script-cleanup-01-12-8 <br> </p>
+            <p style="margin: 5px;"> <b>Message template:</b> <i>send-message </i> </p>
+            </p> 
+          </div>
+          
+        </div>
+      </div>
+  
+
+    </main>
+  
+    <div id="message-container">
+    <form class="msger-inputarea" id="send-container">
+      <input type="text" class="msger-input" placeholder="Enter your message...">
+      <button type="submit" class="msger-send-btn" id="send-button">Send</button>
+    </form>
+  </div>
+  </section>
+</body>
+</html>
