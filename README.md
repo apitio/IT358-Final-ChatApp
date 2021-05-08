@@ -1,6 +1,6 @@
-# IT358-Final-ChatApp
+# IT358 - Final Project
 
-## Final Project – Installation Instructions
+## Chat Application – Installation Instructions
 
 1. Clone the repository
 
